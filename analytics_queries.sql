@@ -70,3 +70,32 @@ SELECT course_id,
 FROM completion_ratio
 ORDER BY dropout_rate DESC;
 
+---DASHBOARD ANALYTICS
+
+--Daily Active Users (DAU)
+SELECT DATE_TRUNC('day', activity_time) AS day,
+       COUNT(DISTINCT user_id) AS dau
+FROM activity_logs
+GROUP BY day
+ORDER BY day DESC;
+
+
+--Monthly Active Users
+SELECT DATE_TRUNC('month', activity_time) AS month,
+       COUNT(DISTINCT user_id) AS mau
+FROM activity_logs
+GROUP BY month
+ORDER BY month DESC;
+
+--Growth trend by category (Last 6 Months)
+SELECT 
+    DATE_TRUNC('month', al.activity_time) AS month,
+    cat.name,
+    COUNT(*) AS activity_count
+FROM activity_logs al
+JOIN course c ON al.course_id = c.id
+JOIN category cat ON c.category_id = cat.id
+WHERE al.activity_time >= NOW() - INTERVAL '6 months'
+GROUP BY month, cat.name
+ORDER BY month;
+
