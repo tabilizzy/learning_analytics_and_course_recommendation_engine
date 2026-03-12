@@ -88,4 +88,6 @@ FROM enrollments e,
      generate_series(1,5) -- multiple activities per enrollment
 LIMIT 1000;
 
+SELECT *
+FROM category;
 
