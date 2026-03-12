@@ -42,3 +42,31 @@ SELECT
 FROM first_activity
 LEFT JOIN returned_users
 ON first_activity.user_id = returned_users.user_id;
+
+--Courses with highest dropout rate
+--this calculates the dropout rate for various courses by comparing total enrollments to actual user activity
+-- It identifies which courses are failing to keep students engaged by measuring the gap between signing up and actually participating.
+
+WITH enrollment_counts AS (
+    SELECT course_id, COUNT(*) AS enrolled
+    FROM enrollments
+    GROUP BY course_id
+),
+active_users AS (
+    SELECT DISTINCT course_id, user_id
+    FROM activity_logs
+),
+completion_ratio AS (
+    SELECT 
+        e.course_id,
+        COUNT(DISTINCT a.user_id)::float / e.enrolled AS engagement_ratio
+    FROM enrollment_counts e
+    LEFT JOIN active_users a
+    ON e.course_id = a.course_id
+    GROUP BY e.course_id, e.enrolled
+)
+SELECT course_id,
+       1 - engagement_ratio AS dropout_rate
+FROM completion_ratio
+ORDER BY dropout_rate DESC;
+
