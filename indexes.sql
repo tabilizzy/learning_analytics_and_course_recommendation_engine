@@ -116,7 +116,6 @@ CREATE INDEX IF NOT EXISTS idx_enrollment_covering
 ON enrollments(course_id, user_id);
 
 
--- =====================================================
 -- 8. OPTIONAL: MATERIALIZED VIEW INDEXING
 -- (If you implement materialized analytics views)
 -- =====================================================
