@@ -11,6 +11,7 @@ List tables here
 
 Include **primary keys, foreign keys, constraints, and indexes**.
 
+
 ### Relationships
 
 State relationships and cardinality
