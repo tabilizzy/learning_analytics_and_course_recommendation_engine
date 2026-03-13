@@ -26,7 +26,6 @@ CREATE TABLE Course (
     category_id INT,
     rating DECIMAL(2,1),
     is_active BOOLEAN DEFAULT TRUE,
-
     CONSTRAINT fk_courses_category
         FOREIGN KEY (category_id)
         REFERENCES Category(id)
@@ -41,14 +40,11 @@ CREATE TABLE enrollments (
     user_id INT,
     course_id INT,
     enrolled_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
     PRIMARY KEY (user_id, course_id),
-
     CONSTRAINT fk_enrollments_user
         FOREIGN KEY (user_id)
         REFERENCES Users(id)
         ON DELETE CASCADE,
-
     CONSTRAINT fk_enrollments_course
         FOREIGN KEY (course_id)
         REFERENCES Course(id)
@@ -64,12 +60,10 @@ CREATE TABLE activity_logs (
     course_id INT,
     activity_type VARCHAR(100),
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
     CONSTRAINT fk_logs_user
         FOREIGN KEY (user_id)
         REFERENCES Users(id)
         ON DELETE CASCADE,
-
     CONSTRAINT fk_logs_course
         FOREIGN KEY (course_id)
         REFERENCES Course(id)
@@ -85,12 +79,10 @@ CREATE TABLE course_reviews (
     rating INT CHECK (rating BETWEEN 1 AND 5),
     comment TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-
     CONSTRAINT fk_reviews_user
         FOREIGN KEY (user_id)
         REFERENCES Users(id)
         ON DELETE CASCADE,
-
     CONSTRAINT fk_reviews_course
         FOREIGN KEY (course_id)
         REFERENCES Course(id)
