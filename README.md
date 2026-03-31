@@ -11,7 +11,7 @@ This project implements the backend engine for EduLearn Africa, an online learni
 | ---------------- | -------------------------------------------|
 | `users`          | Stores learners account information        |
 | `courses`        | stores course information                  |
-| `categories`     | Represents course catergory             |
+| `categories`     | Represents course catergory                |
 | `enrollments`    | Tracks which users enroll in which courses |
 | `activity_logs`  | Records user interactions with courses     |
 | `course_reviews` | Stores course feedback and ratings         |
