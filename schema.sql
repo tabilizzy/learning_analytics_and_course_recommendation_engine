@@ -1,14 +1,13 @@
 
 
 -- 1. USERS TABLE
-
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    lastest_update_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
-
 
 -- 2. CATEGORY TABLE
 
@@ -59,7 +58,7 @@ CREATE TABLE activity_logs (
     user_id INT,
     course_id INT,
     activity_type VARCHAR(100),
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT fk_logs_user
         FOREIGN KEY (user_id)
         REFERENCES Users(id)
@@ -78,7 +77,8 @@ CREATE TABLE course_reviews (
     course_id INT,
     rating INT CHECK (rating BETWEEN 1 AND 5),
     comment TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    lastest_update_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT fk_reviews_user
         FOREIGN KEY (user_id)
         REFERENCES Users(id)

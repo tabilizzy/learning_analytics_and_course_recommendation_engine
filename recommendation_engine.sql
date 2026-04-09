@@ -1,6 +1,6 @@
-CREATE OR REPLACE FUNCTION recommend_courses(p_user_id BIGINT, p_limit INT DEFAULT 5)
+CREATE OR REPLACE FUNCTION recommend_courses(p_user_id INT, p_limit INT DEFAULT 5)
 RETURNS TABLE(
-    course_id BIGINT,
+    course_id INT,
     title TEXT,
     category TEXT,
     score FLOAT
